@@ -10,7 +10,6 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        # 获取HTML表单中输入的参数
         arg1 = request.form['arg1']
         arg2 = request.form['arg2']
         
@@ -18,7 +17,7 @@ def index():
         url1 = "https://apis.map.qq.com/ws/geocoder/v1/"
         params = {
             "address": arg1,
-            "key": "7D5BZ-YYYEX-3JD4K-TEO2H-FTKDO-VUFYW"
+            "key": "填入腾讯地图key"
         }
         response = requests.get(url1, params=params)
         data = json.loads(response.text)
@@ -30,7 +29,7 @@ def index():
         url2 = "https://apis.map.qq.com/ws/geocoder/v1/"
         params = {
             "address": arg2,
-            "key": "7D5BZ-YYYEX-3JD4K-TEO2H-FTKDO-VUFYW"
+            "key": "填入腾讯地图key"
         }
         response = requests.get(url2, params=params)
         data = json.loads(response.text)
@@ -40,7 +39,7 @@ def index():
         origin = location1
         destination = location2
         
-        url3 = "https://restapi.amap.com/v3/direction/driving?key=ef77fee1406e262bf0b629872df5c0dc&origin={}&destination={}&originid=&destinationid=&extensions=all&strategy=0&waypoints=&avoidpolygons=&avoidroad=".format(origin, destination)
+        url3 = "https://restapi.amap.com/v3/direction/driving?key=填入高德地图的key&origin={}&destination={}&originid=&destinationid=&extensions=all&strategy=0&waypoints=&avoidpolygons=&avoidroad=".format(origin, destination)
         response = requests.get(url3)
         out_json = json.loads(response.content)
         all_list = []
@@ -68,11 +67,8 @@ def index():
             new_arr = [arr[1], arr[0]]
             output_arr.append(new_arr)
         result=str(output_arr)
-        
-        # 将结果返回给HTML页面
         return 'The result is: {}'.format(result)
     
-    # 如果请求方法是GET，则返回一个简单的HTML表单
     return '''
         <form method="post">
             <label for="arg1">起点:</label>
